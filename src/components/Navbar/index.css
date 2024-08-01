@@ -1,0 +1,19 @@
+.navbar-container {
+  background-color: #2c0e3a;
+  display: flex;
+  justify-content: space-between;
+}
+
+.timer {
+  color: #fec653;
+  font-family: 'Roboto';
+  font-size: 18px;
+  font-weight: 600;
+}
+
+.score {
+  color: #ffffff;
+  font-family: 'Roboto';
+  font-size: 18px;
+  font-weight: 600;
+}
