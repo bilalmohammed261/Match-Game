@@ -1,7 +1,7 @@
 import './index.css'
 
 const Navbar = props => {
-  const {timeRemainingInSeconds} = props
+  const {timeRemainingInSeconds, score} = props
   return (
     <div className="navbar-container">
       <img
@@ -9,7 +9,7 @@ const Navbar = props => {
         alt="website logo"
       />
       <p className="score">
-        Score:<span className="timer">0</span>
+        Score:<span className="timer">{score}</span>
       </p>
       <img
         src="https://assets.ccbp.in/frontend/react-js/match-game-timer-img.png"
