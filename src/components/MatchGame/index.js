@@ -13,6 +13,7 @@ class MatchGame extends Component {
       activeTabId: tabsList[0].tabId,
       activeImageUrl: imagesList[0].imageUrl,
       score: 0,
+      isGameOver: false,
     }
   }
 
@@ -30,8 +31,6 @@ class MatchGame extends Component {
       this.setState(prevState => ({
         timeRemainingInSeconds: prevState.timeRemainingInSeconds - 1,
       }))
-    } else {
-      clearInterval(this.timerID)
     }
   }
 
@@ -61,19 +60,23 @@ class MatchGame extends Component {
       const randomImageUrl =
         imagesList[Math.floor(Math.random() * imagesList.length)].imageUrl
       this.setState({activeImageUrl: randomImageUrl})
+    } else {
+      this.setState({isGameOver: true})
     }
   }
 
   resetGame = () => {
     console.log('rest game')
+    clearInterval(this.timerID)
 
     const {tabsList, imagesList} = this.props
-    this.setState = {
+    this.setState({
       timeRemainingInSeconds: 60,
       activeTabId: tabsList[0].tabId,
       activeImageUrl: imagesList[0].imageUrl,
       score: 0,
-    }
+      isGameOver: false,
+    })
   }
 
   render() {
@@ -82,6 +85,7 @@ class MatchGame extends Component {
       activeTabId,
       activeImageUrl,
       score,
+      isGameOver,
     } = this.state
     // console.log(activeTabId)
     const {tabsList} = this.props
@@ -92,7 +96,7 @@ class MatchGame extends Component {
     return (
       <div className="app-container">
         <Navbar timeRemainingInSeconds={timeRemainingInSeconds} score={score} />
-        {timeRemainingInSeconds > 0 ? (
+        {!isGameOver ? (
           <div>
             <img src={activeImageUrl} alt="match" />
             <ul className="tabs-list">
@@ -121,10 +125,14 @@ class MatchGame extends Component {
               src="https://assets.ccbp.in/frontend/react-js/match-game-trophy.png"
               alt="trophy"
             />
-            <h1>YOUR SCORE</h1>
+            <p>YOUR SCORE</p>
             <p>{score}</p>
             <button type="button" onClick={this.resetGame}>
-              Play Again
+              <img
+                src="https://assets.ccbp.in/frontend/react-js/match-game-play-again-img.png"
+                alt="reset"
+              />
+              PLAY AGAIN
             </button>
           </div>
         )}
