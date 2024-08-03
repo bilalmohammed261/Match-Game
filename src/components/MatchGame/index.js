@@ -31,6 +31,8 @@ class MatchGame extends Component {
       this.setState(prevState => ({
         timeRemainingInSeconds: prevState.timeRemainingInSeconds - 1,
       }))
+    } else {
+      this.setState({isGameOver: true})
     }
   }
 
